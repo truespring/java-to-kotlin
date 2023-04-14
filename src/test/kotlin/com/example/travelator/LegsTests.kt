@@ -1,13 +1,13 @@
 package com.example.travelator
 
-import com.example.travelator.Legs.findLongestLegOver
-import org.junit.jupiter.api.Assertions
+import com.example.travelator.Legs.longestLegOver
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
-import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
 internal class LegsTests {
@@ -20,36 +20,30 @@ internal class LegsTests {
     private val oneDay = Duration.ofDays(1)
 
     @Test
-    fun is_absent_when_no_legs() {
-        Assertions.assertEquals(
-            Optional.empty<Any>(),
-            findLongestLegOver(emptyList(), Duration.ZERO)
-        )
+    fun `is absent when no legs`() {
+        assertNull(legs.longestLegOver(emptyList(), Duration.ZERO))
     }
 
     @Test
-    fun is_absent_when_no_legs_are_long_enough() {
-        Assertions.assertEquals(
-            Optional.empty<Any>(),
-            findLongestLegOver(legs, oneDay)
-        )
+    fun `is absent when no legs long enough`() {
+        assertNull(legs.longestLegOver(legs, oneDay))
     }
 
     @Test
-    fun is_longest_leg_when_one_match() {
-        Assertions.assertEquals(
+    fun `is longest leg when one match`() {
+        assertEquals(
             "one day",
-            findLongestLegOver(legs, oneDay.minusMillis(1))
-                .orElseThrow().description
+            legs.longestLegOver(legs, oneDay.minusMillis(1))
+            !!.description
         )
     }
 
     @Test
-    fun is_longest_leg_when_more_than_one_match() {
-        Assertions.assertEquals(
+    fun `is longest leg when more than one match`() {
+        assertEquals(
             "one day",
-            findLongestLegOver(legs, Duration.ofMinutes(59))
-                .orElseThrow().description
+            legs.longestLegOver(legs, Duration.ofMinutes(59))
+            ?.description
         )
     }
 
