@@ -6,15 +6,16 @@ class PreferencesView : View() {
     private val greetingPicker = GreetingPicker()
     private val localePicker = LocalePicker()
     private val currencyPicker = CurrencyPicker()
+
     fun showModal(preferences: UserPreferences): UserPreferences {
         greetingPicker.greeting = preferences.greeting
         localePicker.locale = preferences.locale
         currencyPicker.currency = preferences.currency
         super.show()
         return UserPreferences(
-            greetingPicker.greeting,
-            localePicker.locale,
-            currencyPicker.currency
+            greeting = greetingPicker.greeting,
+            locale = localePicker.locale,
+            currency = currencyPicker.currency
         )
     }
 }
