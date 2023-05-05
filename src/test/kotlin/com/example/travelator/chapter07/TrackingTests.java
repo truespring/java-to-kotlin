@@ -1,6 +1,5 @@
 package com.example.travelator.chapter07;
 
-import com.example.travelator.chapter07.testing.StoppedClock;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -14,9 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TrackingTests {
 
-    final StoppedClock clock = new StoppedClock();
-
-    final InMemoryTrips trips = new InMemoryTrips(clock);
+    final InMemoryTrips trips = new InMemoryTrips();
     final Tracking tracking = new Tracking(trips);
 
     @Test
