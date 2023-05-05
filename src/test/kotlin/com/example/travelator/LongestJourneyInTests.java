@@ -36,6 +36,13 @@ class LongestJourneyInTests {
     public void returns_up_to_limit_results() {
         assertEquals(listOf(longJourney, mediumJourney, shortJourney), longestJourneysIn(listOf(shortJourney, mediumJourney, longJourney), 4));
     }
+    
+    @Test
+    public void returns_immutable_list_results() {
+        ArrayList<Journey> journeys = listOf(shortJourney, mediumJourney, longJourney);
+        longestJourneysIn(journeys, 1);
+        assertEquals(3, journeys.size());
+    }
 
     private static ZonedDateTime now = ZonedDateTime.now();
     private Location somewhere = new Location();
